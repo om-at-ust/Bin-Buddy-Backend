@@ -1,6 +1,7 @@
 package com.CapstoneProject.Bin.binService.service;
 
 import com.CapstoneProject.Bin.binService.entity.Bin;
+import com.CapstoneProject.Bin.binService.entity.BinStatus;
 import com.CapstoneProject.Bin.binService.feignClient.RouteFeignClient;
 import com.CapstoneProject.Bin.binService.repository.BinRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,4 +64,31 @@ public class BinService {
         }
         throw  new RuntimeException("Bin with id " + id + "not found");
     }
+
+
+
+    private static final int MIN_FILL_LEVEL = 0;
+    private static final int MAX_FILL_LEVEL = 100;
+    public Bin updateBinStatus(Long id, int fillLevel) {
+        Bin bin = getBinById(id);
+        if (bin != null) {
+            bin.setFillLevel(fillLevel);
+            if (fillLevel == MIN_FILL_LEVEL) {
+                bin.setStatus(BinStatus.EMPTY);
+            } else if (fillLevel < 50) {
+                bin.setStatus(BinStatus.HALF_FULL);
+            } else if (fillLevel < 75) {
+                bin.setStatus(BinStatus.QUARTERLY_FULL);
+            } else if (fillLevel < MAX_FILL_LEVEL) {
+                bin.setStatus(BinStatus.FULL);
+            } else {
+                bin.setStatus(BinStatus.OVERFLOWING);
+            }
+            return binRepository.save(bin);
+        }
+        return null;
+    }
+
+    //TODO : assign the filled bins to the scheduled Job list
+    // TODO: <to be done after route microservice>
 }
