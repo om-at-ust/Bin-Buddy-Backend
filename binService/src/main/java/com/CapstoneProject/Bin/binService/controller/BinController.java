@@ -1,20 +1,19 @@
 package com.CapstoneProject.Bin.binService.controller;
 
 import com.CapstoneProject.Bin.binService.entity.Bin;
+import com.CapstoneProject.Bin.binService.service.BinService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/bins")
-@CrossOrigin(origins = "http://localhost:4200")
 public class BinController {
+    @Autowired
+    private BinService binService;
 
-    private final BinService binService;
     public BinController(BinService binService) {
         this.binService = binService;
     }
@@ -47,8 +46,8 @@ public class BinController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<Bin> updateBin(@RequestBody Bin bin , @PathVariable Long id) {
-        return ResponseEntity.ok(binService.updateBins(bin,id));
+    public ResponseEntity<Bin> updateBin(@RequestBody Bin bin, @PathVariable Long id) {
+        return ResponseEntity.ok(binService.updateBins(bin, id));
     }
 
     //    bin/{id}?fillLevel=X
@@ -79,7 +78,7 @@ public class BinController {
     }
 
     @GetMapping("/full-overflowing")
-    public ResponseEntity<List<Bin>> getFullOrOverflowingBins(){
+    public ResponseEntity<List<Bin>> getFullOrOverflowingBins() {
         List<Bin> fullAndOverflowingBins = binService.getFullAndOverflowingBins();
         if (fullAndOverflowingBins != null) {
             return ResponseEntity.ok(fullAndOverflowingBins);
@@ -87,3 +86,4 @@ public class BinController {
             return ResponseEntity.notFound().build();
         }
     }
+}
