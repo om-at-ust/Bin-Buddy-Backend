@@ -13,6 +13,6 @@ public interface IssueRepository extends MongoRepository<Issue, String>{
 
     List<Issue> findByStatus(IssueStatus issueStatus);
 
-    List<Issue> findByUserId(Long userId);
+    List<Issue> findByusername(String username);
 
 }

@@ -59,7 +59,7 @@ if (!$distributionUrl) {
 switch -wildcard -casesensitive ( $($distributionUrl -replace '^.*/','') ) {
   "maven-mvnd-*" {
     $USE_MVND = $true
-    $distributionUrl = $distributionUrl -replace '-bin\.[^.]*$',"-windows-amd64.zip"
+    $distributionUrl = $distributionUrl -replace '-binId\.[^.]*$',"-windows-amd64.zip"
     $MVN_CMD = "mvnd.cmd"
     break
   }
@@ -77,7 +77,7 @@ if ($env:MVNW_REPOURL) {
   $distributionUrl = "$env:MVNW_REPOURL$MVNW_REPO_PATTERN$($distributionUrl -replace '^.*'+$MVNW_REPO_PATTERN,'')"
 }
 $distributionUrlName = $distributionUrl -replace '^.*/',''
-$distributionUrlNameMain = $distributionUrlName -replace '\.[^.]*$','' -replace '-bin$',''
+$distributionUrlNameMain = $distributionUrlName -replace '\.[^.]*$','' -replace '-binId$',''
 $MAVEN_HOME_PARENT = "$HOME/.m2/wrapper/dists/$distributionUrlNameMain"
 if ($env:MAVEN_USER_HOME) {
   $MAVEN_HOME_PARENT = "$env:MAVEN_USER_HOME/wrapper/dists/$distributionUrlNameMain"
@@ -87,12 +87,12 @@ $MAVEN_HOME = "$MAVEN_HOME_PARENT/$MAVEN_HOME_NAME"
 
 if (Test-Path -Path "$MAVEN_HOME" -PathType Container) {
   Write-Verbose "found existing MAVEN_HOME at $MAVEN_HOME"
-  Write-Output "MVN_CMD=$MAVEN_HOME/bin/$MVN_CMD"
+  Write-Output "MVN_CMD=$MAVEN_HOME/binId/$MVN_CMD"
   exit $?
 }
 
 if (! $distributionUrlNameMain -or ($distributionUrlName -eq $distributionUrlNameMain)) {
-  Write-Error "distributionUrl is not valid, must end with *-bin.zip, but found $distributionUrl"
+  Write-Error "distributionUrl is not valid, must end with *-binId.zip, but found $distributionUrl"
 }
 
 # prepare tmp dir
@@ -146,4 +146,4 @@ try {
   catch { Write-Warning "Cannot remove $TMP_DOWNLOAD_DIR" }
 }
 
-Write-Output "MVN_CMD=$MAVEN_HOME/bin/$MVN_CMD"
+Write-Output "MVN_CMD=$MAVEN_HOME/binId/$MVN_CMD"

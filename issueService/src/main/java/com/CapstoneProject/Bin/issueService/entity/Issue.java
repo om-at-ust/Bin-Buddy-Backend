@@ -1,33 +1,22 @@
 package com.CapstoneProject.Bin.issueService.entity;
 
-
-import com.CapstoneProject.Bin.issueService.dtos.BinDTO1;
-import com.CapstoneProject.Bin.issueService.dtos.UserDTO;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 
+@Document
 public class Issue {
     @Id
     String id;
     String description;
-    UserDTO sender;
-    BinDTO1 bin;
+    String username;
+    Long binId;
     IssueStatus status;
     LocalDateTime createdAt;
     LocalDateTime resolvedAt;
 
     public Issue() {
-    }
-
-    public Issue(String id, String description, UserDTO sender, BinDTO1 bin, IssueStatus status, LocalDateTime createdAt, LocalDateTime resolvedAt) {
-        this.id = id;
-        this.description = description;
-        this.sender = sender;
-        this.bin = bin;
-        this.status = status;
-        this.createdAt = createdAt;
-        this.resolvedAt = resolvedAt;
     }
 
     public String getId() {
@@ -46,20 +35,20 @@ public class Issue {
         this.description = description;
     }
 
-    public UserDTO getSender() {
-        return sender;
+    public String getUsername() {
+        return username;
     }
 
-    public void setSender(UserDTO sender) {
-        this.sender = sender;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public BinDTO1 getBin() {
-        return bin;
+    public Long getBinId() {
+        return binId;
     }
 
-    public void setBin(BinDTO1 bin) {
-        this.bin = bin;
+    public void setBinId(Long binId) {
+        this.binId = binId;
     }
 
     public IssueStatus getStatus() {
@@ -83,6 +72,16 @@ public class Issue {
     }
 
     public void setResolvedAt(LocalDateTime resolvedAt) {
+        this.resolvedAt = resolvedAt;
+    }
+
+    public Issue(String id, String description, String username, Long binId, IssueStatus status, LocalDateTime createdAt, LocalDateTime resolvedAt) {
+        this.id = id;
+        this.description = description;
+        this.username = username;
+        this.binId = binId;
+        this.status = status;
+        this.createdAt = createdAt;
         this.resolvedAt = resolvedAt;
     }
 }

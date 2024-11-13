@@ -1,7 +1,6 @@
 package com.CapstoneProject.Bin.issueService.services;
 
 import com.CapstoneProject.Bin.issueService.dtos.Bin;
-import com.CapstoneProject.Bin.issueService.dtos.BinDTO1;
 import com.CapstoneProject.Bin.issueService.dtos.IssueDTO;
 import com.CapstoneProject.Bin.issueService.dtos.UserDTO;
 import com.CapstoneProject.Bin.issueService.entity.Issue;
@@ -27,17 +26,18 @@ public class IssueService {
 
     public String createIssue(IssueDTO issue,Long binId) {
         Bin bin1 = binFeignClient.getBinById(binId);
-        BinDTO1 bin = new BinDTO1(bin1.getId(), bin1.getLatitude(), bin1.getFillLevel(), bin1.getLongitude());
-        ResponseEntity<?> userResponse = userFeignClient.getUserByUserName(issue.getUserName());
-        UserDTO user = (UserDTO) userResponse.getBody();
-        if(bin == null || user == null) {
+        String userName = issue.getUsername();
+
+        UserDTO user= userFeignClient.getUserByUserName(userName);
+
+        if(bin1 == null || user == null) {
             return "Bin or User not found";
         }
         Issue realIssue = new Issue();
-        realIssue.setBin(bin);
+        realIssue.setBinId(bin1.getId());
+        realIssue.setUsername(issue.getUsername());
         realIssue.setDescription(issue.getDescription());
         realIssue.setCreatedAt(LocalDateTime.now());
-        realIssue.setSender(user);
         realIssue.setStatus(IssueStatus.PENDING);
         realIssue.setResolvedAt(null);
         issueRepository.save(realIssue);
@@ -59,8 +59,9 @@ public class IssueService {
     public List<Issue> getResolvedIssues() {
         return issueRepository.findByStatus(IssueStatus.RESOLVED);
     }
-    public List<Issue> getUserIssues(Long userId) {
-        return issueRepository.findByUserId(userId);
+    public List<Issue> getUserIssues(String username) {
+
+        return issueRepository.findByusername(username);
     }
 }
 

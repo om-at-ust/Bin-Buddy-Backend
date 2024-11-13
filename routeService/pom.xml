@@ -8,11 +8,11 @@
 		<version>3.3.5</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.CapstoneProject.Bin</groupId>
+	<groupId>com.CapstoneProjectBinBuddy</groupId>
 	<artifactId>routeService</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>routeService</name>
-	<description>MicroService for for generating routes</description>
+	<description>a microservice for routing</description>
 	<url/>
 	<licenses>
 		<license/>
@@ -28,6 +28,7 @@
 	</scm>
 	<properties>
 		<java.version>17</java.version>
+		<spring-cloud.version>2023.0.3</spring-cloud.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -38,6 +39,14 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-openfeign</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -45,6 +54,17 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 	<build>
 		<plugins>
