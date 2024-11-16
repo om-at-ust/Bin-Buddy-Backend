@@ -16,9 +16,10 @@ spring:
           enabled: true
       routes:
         - id: discoveryService
-          uri: http://localhost:8761
+          uri: http://localhost:8761/eureka/
           predicates:
-            - Path=/eureka/**
+            - Path=/
+
 #          filters:
 #            - AuthenticationFilter
 
@@ -26,6 +27,27 @@ spring:
           uri: http://localhost:8081
           predicates:
             - Path=/api/auth/**
+
+        - id: binService
+          uri: http://localhost:8082
+          predicates:
+            - Path=/bins/**
+
+        - id: truckService
+          uri: http://localhost:8083
+          predicates:
+            - Path=/api/trucks/**
+
+        - id: issueService
+          uri: http://localhost:8084
+          predicates:
+            - Path=/issues/**
+
+        - id: routeService
+          uri: http://localhost:8085
+          predicates:
+            - Path=/api/routes/**
+
 
 
 

@@ -10,9 +10,8 @@ import java.util.List;
 @Repository
 public interface TruckRepository extends MongoRepository<Truck, Long>{
     List<Truck> findByStatus(TruckStatus status);
-    Truck findByUserId(Long userId);
+//    Truck findByUserId(Long userId);
 
-// TODO    List<Truck> findByAssignedRouteNotNull();
-//    Truck findByIdAndAssignedRouteNotNull(Long id);
+    Truck findByAssignedRouteId(String routeId);
 
 }

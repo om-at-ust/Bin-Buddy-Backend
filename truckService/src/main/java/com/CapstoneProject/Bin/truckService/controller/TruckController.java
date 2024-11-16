@@ -69,4 +69,23 @@ public class TruckController {
     public void updateTruckStatus(@RequestBody TruckStatusUpdateRequest statusUpdateRequest) {
         truckService.updateTruckStatus(statusUpdateRequest);
     }
+    @PostMapping("/assignRoute")
+    public ResponseEntity<String> assignRouteToTruck(@RequestParam String routeId) {
+        try {
+            String result = truckService.assignRouteToTruck(routeId);
+            return ResponseEntity.ok(result);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+    @GetMapping("/route/{routeId}")
+    public ResponseEntity<Truck> getTruckByRouteId(@PathVariable String routeId) {
+        Truck truck = truckService.getTruckByRouteId(routeId);
+        if (truck != null) {
+            return ResponseEntity.ok(truck);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 }

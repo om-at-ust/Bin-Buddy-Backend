@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import static com.CapstoneProject.Bin.truckService.entity.TruckStatus.UNAVAILABLE;
+
 @Service
 public class TruckService {
 
@@ -58,5 +60,24 @@ public class TruckService {
         Truck truck = getTruckById(id);
         truck.setStatus(status);
         return truckRepository.save(truck);
+    }
+
+    public String assignRouteToTruck(String routeId) throws Exception {
+        List<Truck> trucks = truckRepository.findByStatus(TruckStatus.AVAILABLE);
+        if(trucks.isEmpty()){
+            throw new Exception("No available trucks");
+        }
+        Truck truck = trucks.get(0);
+        if (truck != null) {
+            truck.setAssignedRouteId(routeId);
+            truck.setStatus(UNAVAILABLE);
+            truckRepository.save(truck);
+            return "Route assigned to truck successfully";
+        } else {
+            return "Truck not found";
+        }
+    }
+    public Truck getTruckByRouteId(String routeId) {
+        return truckRepository.findByAssignedRouteId(routeId);
     }
 }
