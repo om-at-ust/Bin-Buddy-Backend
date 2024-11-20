@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/bins")
+@CrossOrigin(origins = "http://localhost:5173")
 public class BinController {
     @Autowired
     private BinService binService;
@@ -24,7 +25,7 @@ public class BinController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Bin> getBinById(@PathVariable Long id) {
+    public ResponseEntity<Bin> getBinById(@PathVariable String id) {
         Bin bin = binService.getBinById(id);
         if (bin != null) {
             return ResponseEntity.ok(bin);
@@ -46,13 +47,13 @@ public class BinController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<Bin> updateBin(@RequestBody Bin bin, @PathVariable Long id) {
+    public ResponseEntity<Bin> updateBin(@RequestBody Bin bin, @PathVariable String id) {
         return ResponseEntity.ok(binService.updateBins(bin, id));
     }
 
     //    bin/{id}?fillLevel=X
     @PutMapping("/{id}")
-    public ResponseEntity<Bin> updateBinStatus(@PathVariable Long id, @RequestParam int fillLevel) {
+    public ResponseEntity<Bin> updateBinStatus(@PathVariable String id, @RequestParam int fillLevel) {
         Bin updatedBin = binService.updateBinStatus(id, fillLevel);
         if (updatedBin != null) {
             return ResponseEntity.ok(updatedBin);
@@ -62,13 +63,13 @@ public class BinController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteBin(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteBin(@PathVariable String id) {
         binService.deleteBin(id);
         return ResponseEntity.noContent().build();
     }
 
     @PostMapping("/{id}/update-fill-level")
-    public ResponseEntity<Bin> updateFillLevel(@PathVariable Long id, @RequestParam int fillLevel) {
+    public ResponseEntity<Bin> updateFillLevel(@PathVariable String id, @RequestParam int fillLevel) {
         Bin updatedBin = binService.updateBinStatus(id, fillLevel);
         if (updatedBin != null) {
             return ResponseEntity.ok(updatedBin);

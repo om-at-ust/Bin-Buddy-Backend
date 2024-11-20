@@ -5,6 +5,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
 
-public interface BinRepository extends MongoRepository<Bin, Long>{
+public interface BinRepository extends MongoRepository<Bin,String>{
     List<Bin> findByStatusIn(List<String> statuses);
 }

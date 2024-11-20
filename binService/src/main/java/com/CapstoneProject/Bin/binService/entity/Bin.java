@@ -11,7 +11,7 @@ import java.util.Date;
 public class Bin {
 
     @Id
-    private Long id;
+    private String id;
 
     private String location;
     private Double latitude;
@@ -28,11 +28,11 @@ public class Bin {
     private Date lastCollectionDate;
     private Date nextCollectionDate;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -111,7 +111,7 @@ public class Bin {
     public Bin() {
     }
 
-    public Bin(Long id, String location, Double latitude, Double longitude, int wasteAmount, BinStatus status, int fillLevel, LocalDateTime createdAt, Date lastCollectionDate, Date nextCollectionDate) {
+    public Bin(String id, String location, Double latitude, Double longitude, int wasteAmount, BinStatus status, int fillLevel, LocalDateTime createdAt, Date lastCollectionDate, Date nextCollectionDate) {
         this.id = id;
         this.location = location;
         this.latitude = latitude;

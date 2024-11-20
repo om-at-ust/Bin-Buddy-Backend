@@ -33,7 +33,7 @@ public class BinService {
         return binRepository.saveAll(bins);
     }
 
-    public Bin getBinById(Long id) {
+    public Bin getBinById(String id) {
         return binRepository.findById(id).orElse(null);
     }
 
@@ -41,7 +41,7 @@ public class BinService {
         return binRepository.save(bin);
     }
 
-    public void deleteBin(Long id) {
+    public void deleteBin(String id) {
         binRepository.deleteById(id);
     }
 
@@ -50,7 +50,7 @@ public class BinService {
         return binRepository.findByStatusIn(Arrays.asList("FULL", "OVERFLOWING"));
     }
 
-    public Bin updateBins(Bin bin , Long id) {
+    public Bin updateBins(Bin bin , String id) {
         Optional<Bin> optionalBin = binRepository.findById(id);
         if(optionalBin.isPresent()) {
             Bin foundedbin = optionalBin.get();
@@ -69,7 +69,7 @@ public class BinService {
 
     private static final int MIN_FILL_LEVEL = 0;
     private static final int MAX_FILL_LEVEL = 100;
-    public Bin updateBinStatus(Long id, int fillLevel) {
+    public Bin updateBinStatus(String id, int fillLevel) {
         Bin bin = getBinById(id);
         if (bin != null) {
             bin.setFillLevel(fillLevel);

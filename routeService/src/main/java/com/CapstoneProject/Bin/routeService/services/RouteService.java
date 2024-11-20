@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -41,6 +42,12 @@ public class RouteService {
         GeoapifyResponse res = geoapifyFeignClient.getRoute(waypoints, mode, apiKey);
         routeRepository.save(res);
         return res;
+    }
+    public List<GeoapifyResponse> getAllRoutes(){
+        List<GeoapifyResponse> routes = routeRepository.findAll();
+        if(routes.size() == 0 || routes == null) return null;
+        System.out.println(routes);
+        return routes;
     }
 
    public GeoapifyResponse createRoute() throws Exception {
@@ -74,6 +81,14 @@ public class RouteService {
    public ResponseEntity<String> deleteRoute(String id) {
         routeRepository.deleteById(id);
         return ResponseEntity.ok("Route deleted");
+   }
+
+   public String setRouteStatusAssigned(String routeId) {
+        GeoapifyResponse route = routeRepository.findById(routeId).orElse(null);
+        if(route == null) return "Route not found";
+        route.setIsAssigned(true);
+        routeRepository.save(route);
+        return "Route status updated";
    }
 
 }
