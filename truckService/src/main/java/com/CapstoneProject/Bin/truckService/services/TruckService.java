@@ -18,7 +18,7 @@ public class TruckService {
     @Autowired
     private TruckRepository truckRepository;
 
-      public List<Truck> getAllTrucks() {
+    public List<Truck> getAllTrucks() {
         return truckRepository.findAll();
     }
 
@@ -34,7 +34,7 @@ public class TruckService {
         truckRepository.save(truck);
     }
 
-    public Truck getTruckById(Long id) {
+    public Truck getTruckById(String id) {
         return truckRepository.findById(id).orElse(null);
     }
 
@@ -47,7 +47,7 @@ public class TruckService {
         return truckRepository.saveAll(trucks);
     }
 
-    public void deleteTruck(Long id) {
+    public void deleteTruck(String id) {
         truckRepository.deleteById(id);
     }
 
@@ -56,7 +56,7 @@ public class TruckService {
     }
 
     // Change truck status (e.g., set to ON_ROUTE)
-    public Truck updateTruckStatus(Long id, TruckStatus status) {
+    public Truck updateTruckStatus(String id, TruckStatus status) {
         Truck truck = getTruckById(id);
         truck.setStatus(status);
         return truckRepository.save(truck);

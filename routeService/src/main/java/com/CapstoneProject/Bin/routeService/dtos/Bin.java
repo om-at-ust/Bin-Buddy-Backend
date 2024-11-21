@@ -11,7 +11,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Bin {
-    private Long id;
+    private String id;
 
     private String location;
     private Double latitude;

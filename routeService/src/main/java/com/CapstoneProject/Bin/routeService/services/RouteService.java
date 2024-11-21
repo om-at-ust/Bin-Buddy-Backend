@@ -32,17 +32,17 @@ public class RouteService {
     String sourceLon = "76.936638";
     String destinationLat = "8.4248574";
     String destinationLon = "76.9490328";
-    String waypoints = sourceLat + "," + sourceLon + "|" + destinationLat + "," + destinationLon;
+//    String waypoints = sourceLat + "," + sourceLon + "|" + destinationLat + "," + destinationLon;
     String mode = "drive";
     String apiKey = "e40bf7725f014f46b46609ebb9112a9a";
 
 
 
-    public GeoapifyResponse fetchRoute() {
-        GeoapifyResponse res = geoapifyFeignClient.getRoute(waypoints, mode, apiKey);
-        routeRepository.save(res);
-        return res;
-    }
+//    public GeoapifyResponse fetchRoute() {
+//        GeoapifyResponse res = geoapifyFeignClient.getRoute(waypoints, mode, apiKey);
+//        routeRepository.save(res);
+//        return res;
+//    }
     public List<GeoapifyResponse> getAllRoutes(){
         List<GeoapifyResponse> routes = routeRepository.findAll();
         if(routes.size() == 0 || routes == null) return null;

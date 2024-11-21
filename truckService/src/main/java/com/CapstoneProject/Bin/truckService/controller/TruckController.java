@@ -29,7 +29,7 @@ public class TruckController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Truck> getTruckById(@PathVariable Long id) {
+    public ResponseEntity<Truck> getTruckById(@PathVariable String id) {
         Truck truck = truckService.getTruckById(id);
         if (truck != null) {
             return ResponseEntity.ok(truck);
@@ -51,7 +51,7 @@ public class TruckController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Truck> updateTruck(@PathVariable Long id, @RequestBody Truck truck) {
+    public ResponseEntity<Truck> updateTruck(@PathVariable String id, @RequestBody Truck truck) {
         truck.setId(id);
         Truck updatedTruck = truckService.updateTruck(truck);
         if (updatedTruck != null) {
@@ -62,7 +62,7 @@ public class TruckController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteTruck(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteTruck(@PathVariable String id) {
         truckService.deleteTruck(id);
         return ResponseEntity.noContent().build();
     }

@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 public class Truck {
 
     @Id
-    private Long id;
+    private String id;
 
     private Long userId;
 

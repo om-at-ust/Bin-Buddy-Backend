@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TruckStatusUpdateRequest {
-    private Long truckId;
+    private String truckId;
     private TruckStatus newStatus;
 
 }

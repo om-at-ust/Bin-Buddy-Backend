@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface TruckRepository extends MongoRepository<Truck, Long>{
+public interface TruckRepository extends MongoRepository<Truck, String>{
     List<Truck> findByStatus(TruckStatus status);
 //    Truck findByUserId(Long userId);
 

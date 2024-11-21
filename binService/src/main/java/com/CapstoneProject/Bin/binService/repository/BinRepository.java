@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface BinRepository extends MongoRepository<Bin,String>{
     List<Bin> findByStatusIn(List<String> statuses);
+    
 }
