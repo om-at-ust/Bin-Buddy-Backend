@@ -24,7 +24,7 @@ public class IssueService {
     @Autowired
     private UserFeignClient userFeignClient;
 
-    public String createIssue(IssueDTO issue,Long binId) {
+    public String createIssue(IssueDTO issue,String binId) {
         Bin bin1 = binFeignClient.getBinById(binId);
         String userName = issue.getUsername();
 
@@ -62,6 +62,14 @@ public class IssueService {
     public List<Issue> getUserIssues(String username) {
 
         return issueRepository.findByusername(username);
+    }
+
+    public List<Issue> getAllIssues(){
+        return issueRepository.findAll();
+    }
+
+    public void deleteIssue(String issueId) {
+        issueRepository.deleteById(issueId);
     }
 }
 

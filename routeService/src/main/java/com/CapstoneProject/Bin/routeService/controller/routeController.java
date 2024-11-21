@@ -13,14 +13,11 @@ import org.springframework.web.bind.annotation.*;
 public class routeController {
     @Autowired
     RouteService geoapifyService;
-//    @GetMapping("/getRoute")
-//    public GeoapifyResponse getRoute() {
-//        return geoapifyService.fetchRoute();
-//    }
+
 
     @GetMapping("/{id}")
-    public GeoapifyResponse getRouteById(@PathVariable String id) {
-        return geoapifyService.getRouteById(id);
+    public ResponseEntity<GeoapifyResponse> getRouteById(@PathVariable String id) {
+        return new ResponseEntity<>(geoapifyService.getRouteById(id), HttpStatus.OK);
     }
     @GetMapping("/createRoute")
     public GeoapifyResponse createRoute() throws Exception {

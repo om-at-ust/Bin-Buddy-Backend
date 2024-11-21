@@ -12,12 +12,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/issues")
+@CrossOrigin(origins = "http://localhost:5173")
 public class IssueController {
 
     @Autowired
     private IssueService issueService;
     @PostMapping("/createIssue/{binId}")
-    public ResponseEntity<String> createIssue(@RequestBody IssueDTO issue, @PathVariable Long binId) {
+    public ResponseEntity<String> createIssue(@RequestBody IssueDTO issue, @PathVariable String binId) {
            String result = issueService.createIssue(issue,binId);
 
         return new ResponseEntity<>(result, HttpStatus.CREATED);
@@ -42,5 +43,17 @@ public class IssueController {
         List<Issue> resolvedIssues = issueService.getResolvedIssues();
         return new ResponseEntity<>(resolvedIssues, HttpStatus.OK);
     }
+    @GetMapping("/getAllIssues")
+    public ResponseEntity<List<Issue>> getAllIssues() {
+        List<Issue> allIssues = issueService.getAllIssues();
+        return new ResponseEntity<>(allIssues, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/delete/{issueId}")
+    public ResponseEntity<String> deleteIssue(@PathVariable String issueId) {
+        issueService.deleteIssue(issueId);
+        return new ResponseEntity<>("Issue deleted successfully", HttpStatus.OK);
+    }
+
 
 }

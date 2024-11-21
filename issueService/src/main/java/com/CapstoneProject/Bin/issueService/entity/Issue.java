@@ -11,7 +11,7 @@ public class Issue {
     String id;
     String description;
     String username;
-    Long binId;
+    String binId;
     IssueStatus status;
     LocalDateTime createdAt;
     LocalDateTime resolvedAt;
@@ -43,11 +43,11 @@ public class Issue {
         this.username = username;
     }
 
-    public Long getBinId() {
+    public String getBinId() {
         return binId;
     }
 
-    public void setBinId(Long binId) {
+    public void setBinId(String binId) {
         this.binId = binId;
     }
 
@@ -75,7 +75,7 @@ public class Issue {
         this.resolvedAt = resolvedAt;
     }
 
-    public Issue(String id, String description, String username, Long binId, IssueStatus status, LocalDateTime createdAt, LocalDateTime resolvedAt) {
+    public Issue(String id, String description, String username, String binId, IssueStatus status, LocalDateTime createdAt, LocalDateTime resolvedAt) {
         this.id = id;
         this.description = description;
         this.username = username;

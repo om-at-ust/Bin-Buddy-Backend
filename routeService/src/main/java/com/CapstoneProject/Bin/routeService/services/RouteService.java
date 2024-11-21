@@ -74,11 +74,12 @@ public class RouteService {
         return "Route assigned to truck";
    }
 
-   public GeoapifyResponse getRouteById(String id) {
-        return routeRepository.findById(id).orElse(null);
-   }
+    public GeoapifyResponse getRouteById(String id) {
+        return routeRepository.findById(id).orElseThrow(() -> new RuntimeException("Route not found with id: " + id));
+    }
 
-   public ResponseEntity<String> deleteRoute(String id) {
+
+    public ResponseEntity<String> deleteRoute(String id) {
         routeRepository.deleteById(id);
         return ResponseEntity.ok("Route deleted");
    }

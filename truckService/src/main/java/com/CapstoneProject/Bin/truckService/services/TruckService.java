@@ -28,8 +28,7 @@ public class TruckService {
 
     public void updateTruckStatus(TruckStatusUpdateRequest request) {
         Truck truck = truckRepository.findById(request.getTruckId()).orElse(null);
-
-
+        truck.setAssignedRouteId(null);
         truck.setStatus(request.getNewStatus());
         truckRepository.save(truck);
     }
