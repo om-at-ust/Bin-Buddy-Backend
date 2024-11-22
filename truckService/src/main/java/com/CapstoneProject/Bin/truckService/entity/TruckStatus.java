@@ -4,6 +4,5 @@ public enum TruckStatus {
     AVAILABLE,
     ON_ROUTE,
     MAINTENANCE,
-
     UNAVAILABLE
 }

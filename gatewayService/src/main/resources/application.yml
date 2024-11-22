@@ -15,10 +15,7 @@ spring:
         locator:
           enabled: true
       routes:
-        - id: discoveryService
-          uri: http://localhost:8761/eureka/
-          predicates:
-            - Path=/
+
 
 #          filters:
 #            - AuthenticationFilter
